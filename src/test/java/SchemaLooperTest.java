@@ -1,13 +1,18 @@
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-public class SchemaLooperTest {
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+
+class SchemaLooperTest {
 
     @Test
-    public void build() throws IOException {
+    @DisplayName("Should read the node correctly")
+    void build() throws IOException {
 
 
         String json = "{\n" +
@@ -43,7 +48,7 @@ public class SchemaLooperTest {
         final ObjectMapper mapper = new ObjectMapper();
         JsonNode node = mapper.readTree(json);
 
-        SchemaLooper.readProperties(node);
+        assertThat(SchemaLooper.readProperties(node, 0).getSqlString(), is(""));
 
 
     }
