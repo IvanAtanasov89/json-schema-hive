@@ -18,6 +18,10 @@ dependencies {
     
 }
 
+test {
+    useJUnitPlatform()
+}
+
 repositories {
     mavenCentral()
     jcenter()
