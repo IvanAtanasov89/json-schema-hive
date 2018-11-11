@@ -1,5 +1,5 @@
+import field.Field;
 import field.Fields;
-import field.SqlString;
 
 public class CreateStatement implements SqlString {
 
@@ -11,7 +11,7 @@ public class CreateStatement implements SqlString {
         this.fields = new Fields();
     }
 
-    public CreateStatement addField(SqlString field) {
+    public CreateStatement addField(Field field) {
         fields.addField(field);
         return this;
     }

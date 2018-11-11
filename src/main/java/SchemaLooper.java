@@ -1,7 +1,7 @@
 import com.fasterxml.jackson.databind.JsonNode;
-import field.ComplexField;
+import field.BasicField;
 import field.Fields;
-import field.SimpleField;
+import field.StructField;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -15,12 +15,29 @@ public class SchemaLooper {
 
         while (nodes.hasNext()) {
             Map.Entry<String, JsonNode> entry = nodes.next();
-            String field = entry.getKey();
+            String fieldName = entry.getKey();
             String type = entry.getValue().get("type").asText();
+            boolean isLast = isLastField(nodes);
+            int nextLevel = level + 1;
+
             if (type.equals("object")) {
-                fields.addField(new ComplexField(field, readProperties(entry.getValue(),level + 1), level + 1));
+                fields.addField(
+                        StructField.builder()
+                                .name(fieldName)
+                                .fields(readProperties(entry.getValue(), nextLevel))
+                                .level(nextLevel)
+                                .isLast(isLast)
+                                .build()
+                );
             } else {
-               fields.addField(new SimpleField(field, type, level, isLastField(nodes)));
+               fields.addField(
+                       BasicField.builder()
+                               .name(fieldName)
+                               .type(type)
+                               .level(level)
+                               .isLast(isLast)
+                               .build()
+               );
             }
         }
 
@@ -31,29 +48,5 @@ public class SchemaLooper {
     private static boolean isLastField(Iterator fields) {
         return !fields.hasNext();
     }
-
-
-//    private static void processFields(String field, JsonNode attributes) {
-//        String type = attributes.get("type").asText();
-//
-//        if (type.equals("object")) {
-//            readProperties(attributes);
-//        } else {
-//            System.out.println(field + " " + type + ",");
-//        }
-//    }
-//
-//
-//    private static void writeField(String field, JsonNode attributes) {
-//        String type = attributes.get("type").asText();
-//
-//        if (type.equals("object")) {
-//            System.out.println(field + " struct<");
-//            readProperties(attributes);
-//            System.out.println(">");
-//        } else {
-//            System.out.println(field + " " + type + ",");
-//        }
-//    }
 
 }

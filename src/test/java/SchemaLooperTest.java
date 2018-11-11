@@ -13,8 +13,6 @@ class SchemaLooperTest {
     @Test
     @DisplayName("Should read the node correctly")
     void build() throws IOException {
-
-
         String json = "{\n" +
                 "  \"$id\": \"https://example.com/person.schema.json\",\n" +
                 "  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\n" +
@@ -48,7 +46,7 @@ class SchemaLooperTest {
         final ObjectMapper mapper = new ObjectMapper();
         JsonNode node = mapper.readTree(json);
 
-        assertThat(SchemaLooper.readProperties(node, 0).getSqlString(), is(""));
+        assertThat(SchemaLooper.readProperties(node, 0).createSqlPart(), is(""));
 
 
     }
