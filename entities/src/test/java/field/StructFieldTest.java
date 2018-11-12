@@ -12,7 +12,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class StructFieldTest {
 
-    private static final String FIELD_REPRESENTATION = "    nested_field_name string";
+    private static final String FIELD_REPRESENTATION = "nested_field_name string";
 
     @Mock Fields fields;
 
@@ -23,10 +23,9 @@ class StructFieldTest {
                 .name("field_name")
                 .fields(fields)
                 .isLast(false)
-                .level(1)
                 .build();
 
-        String expected = "  field_name struct<\n    nested_field_name string\n>,";
+        String expected = "field_name struct<\n  nested_field_name string\n>,";
         String actual = structField.createSqlPart();
         assertThat(actual, is(expected));
     }

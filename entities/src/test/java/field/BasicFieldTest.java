@@ -9,7 +9,7 @@ class BasicFieldTest {
 
     @Test
     void createSqlPart() {
-        BasicField basicField = BasicField.builder().name("field_name").type("int").build();
+        BasicField basicField = BasicField.builder().name("field_name").type("int").isLast(true).build();
         String expected = "field_name int";
         String actual = basicField.createSqlPart();
         assertThat(actual, is(expected));

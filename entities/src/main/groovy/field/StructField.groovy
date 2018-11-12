@@ -1,23 +1,24 @@
 package field
 
-import format.Indenting
-import groovy.transform.ToString
+import format.Formatter
+import groovy.transform.Canonical
 import groovy.transform.builder.Builder
 
 @Builder
-@ToString
+@Canonical
 class StructField implements Field {
     String name
     Fields fields
-    int level
     boolean isLast
 
     @Override
     String createSqlPart() {
-        String indent = " " * (level * 2)
-        String ending = isLast ? "" : ","
-        String closingBracket = Indenting.indent(">", level - 1)
+        String subFieldsPart = new Formatter(fields.createSqlPart())
+                .indent()
+                .format()
 
-        "${indent}${name} struct<\n${fields.createSqlPart()}\n${closingBracket}${ending}"
+        new Formatter("${name} struct<\n${subFieldsPart}\n>")
+                .addEnding(isLast)
+                .format()
     }
 }
