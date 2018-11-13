@@ -1,9 +1,11 @@
 import com.fasterxml.jackson.databind.JsonNode;
-import field.ArrayField;
 import field.BasicField;
 import field.Field;
 import field.Fields;
-import field.StructField;
+import type.Array;
+import type.StringType;
+import type.Struct;
+import type.Type;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -24,17 +26,20 @@ public class SchemaLooper {
     private static Field createField(Iterator<Map.Entry<String, JsonNode>> nodes) {
         Map.Entry<String, JsonNode> entry = nodes.next();
         String fieldName = entry.getKey();
-        String type = entry.getValue().get("type").asText();
         boolean isLast = isLastField(nodes);
+        return BasicField.builder().name(fieldName).type(readType(entry.getValue())).isLast(isLast).build();
 
+    }
+
+    private static Type readType(JsonNode node) {
+        String type = node.get("type").asText();
         switch (type) {
             case "object":
-                return StructField.builder().name(fieldName).fields(readProperties(entry.getValue())).isLast(isLast).build();
+                return Struct.builder().fields(readProperties(node)).build();
             case "array":
-                String arrayType = entry.getValue().get("items").get("type").asText();
-                return ArrayField.builder().name(fieldName).type(arrayType).isLast(isLast).build();
+                return Array.builder().type(readType(node.get("items"))).build();
             default:
-                return BasicField.builder().name(fieldName).type(type).isLast(isLast).build();
+                return new StringType();
         }
     }
 

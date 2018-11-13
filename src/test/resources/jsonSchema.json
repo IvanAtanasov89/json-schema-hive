@@ -23,6 +23,17 @@
         "type": "string"
       }
     },
+    "complexArray" : {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "arrayField": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "nested": {
       "type": "object",
       "properties": {

@@ -20,6 +20,17 @@ class FormatterTest {
     }
 
     @Test
+    @DisplayName("Should indent each line with 2 characters")
+    void indentAndKeepBlankLines() {
+        String expected = "  hello\n  ";
+        String actual = new Formatter("hello\n")
+                .indent()
+                .format();
+
+        assertThat(actual, is(expected));
+    }
+
+    @Test
     @DisplayName("Ensure that a comma is not added when it is the last element")
     void addEndingWhenLast() {
         String expected = "hello,\nkaboom";

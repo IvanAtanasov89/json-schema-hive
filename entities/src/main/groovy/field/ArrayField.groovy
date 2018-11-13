@@ -14,4 +14,9 @@ class ArrayField implements Field {
     String createSqlPart() {
         new Formatter("$name array<$type>").addEnding(isLast).format()
     }
+
+
+
+    // Field
+    // Type
 }

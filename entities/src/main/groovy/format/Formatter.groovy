@@ -12,7 +12,12 @@ class Formatter {
 
     Formatter indent() {
         String indentSpaces = " " * INDENT_NUM_SPACES
-        toFormat = "${indentSpaces}${toFormat}".split('\\n').join("\n${indentSpaces}")
+        toFormat = "${indentSpaces}${toFormat}".split('\\n', -1).join("\n${indentSpaces}")
+        this
+    }
+
+    Formatter addeNewLines() {
+        toFormat = "\n$toFormat\n"
         this
     }
 
