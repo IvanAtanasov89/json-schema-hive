@@ -27,7 +27,11 @@ public class SchemaLooper {
         Map.Entry<String, JsonNode> entry = nodes.next();
         String fieldName = entry.getKey();
         boolean isLast = isLastField(nodes);
-        return BasicField.builder().name(fieldName).type(readType(entry.getValue())).isLast(isLast).build();
+        return BasicField.builder()
+                .name(fieldName)
+                .type(readType(entry.getValue()))
+                .isLast(isLast)
+                .build();
 
     }
 

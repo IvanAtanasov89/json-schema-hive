@@ -12,8 +12,8 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class FieldsTest {
 
-    @Mock Field field1;
-    @Mock Field field2;
+    @Mock private Field field1;
+    @Mock private Field field2;
 
     @Test
     void createSqlPart() {

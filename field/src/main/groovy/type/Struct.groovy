@@ -1,7 +1,7 @@
 package type
 
 import field.Fields
-import format.Formatter
+import format.SQLFormatter
 import groovy.transform.Canonical
 import groovy.transform.builder.Builder
 
@@ -12,7 +12,7 @@ class Struct implements Type {
 
     @Override
     String createSqlPart() {
-        String nestedFields = new Formatter(fields.createSqlPart()).indent().format()
+        String nestedFields = new SQLFormatter(fields.createSqlPart()).indent().format()
         "struct<\n${nestedFields}\n>"
     }
 

@@ -1,0 +1,17 @@
+CREATE TABLE click (
+  firstName string,
+  lastName string,
+  age string,
+  aliases array<string>,
+  complexArray array<
+    struct<
+      arrayField string
+    >
+  >,
+  nested struct<
+    nestedAgain struct<
+      hello string,
+      yo string
+    >
+  >
+);

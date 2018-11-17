@@ -8,10 +8,6 @@
       "type": "string",
       "description": "The person's first name."
     },
-    "lastName": {
-      "type": "string",
-      "description": "The person's last name."
-    },
     "age": {
       "description": "Age in years which must be equal to or greater than zero.",
       "type": "integer",
@@ -21,33 +17,6 @@
       "type": "array",
       "items": {
         "type": "string"
-      }
-    },
-    "complexArray" : {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "arrayField": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "nested": {
-      "type": "object",
-      "properties": {
-        "nestedAgain": {
-          "type": "object",
-          "properties": {
-            "hello": {
-              "type": "string"
-            },
-            "yo": {
-              "type": "number"
-            }
-          }
-        }
       }
     }
   }

@@ -1,6 +1,6 @@
 package type
 
-import format.Formatter
+import format.SQLFormatter
 import groovy.transform.Canonical
 import groovy.transform.builder.Builder
 
@@ -21,6 +21,6 @@ class Array implements Type {
     }
 
     private static String createComplexSql(Type type) {
-        new Formatter("${type.createSqlPart()}").indent().addeNewLines().format()
+        new SQLFormatter("${type.createSqlPart()}").indent().addeNewLines().format()
     }
 }

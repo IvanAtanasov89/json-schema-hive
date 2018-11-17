@@ -1,27 +1,27 @@
 package format
 
-class Formatter {
+class SQLFormatter {
 
     private static final int INDENT_NUM_SPACES = 2
 
     String toFormat
 
-    Formatter(final String toFormat) {
+    SQLFormatter(final String toFormat) {
         this.toFormat = toFormat
     }
 
-    Formatter indent() {
+    SQLFormatter indent() {
         String indentSpaces = " " * INDENT_NUM_SPACES
         toFormat = "${indentSpaces}${toFormat}".split('\\n', -1).join("\n${indentSpaces}")
         this
     }
 
-    Formatter addeNewLines() {
+    SQLFormatter addeNewLines() {
         toFormat = "\n$toFormat\n"
         this
     }
 
-    Formatter addEnding(boolean isLast) {
+    SQLFormatter addEnding(boolean isLast) {
         toFormat = "${toFormat}${commaOrNoComma(isLast)}"
         this
     }

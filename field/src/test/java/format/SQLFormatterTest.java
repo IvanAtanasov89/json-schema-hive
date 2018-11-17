@@ -6,13 +6,13 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
-class FormatterTest {
+class SQLFormatterTest {
 
     @Test
     @DisplayName("Should indent each line with 2 characters")
     void indent() {
         String expected = "  hello\n  kaboom";
-        String actual = new Formatter("hello\nkaboom")
+        String actual = new SQLFormatter("hello\nkaboom")
                 .indent()
                 .format();
 
@@ -23,7 +23,7 @@ class FormatterTest {
     @DisplayName("Should indent each line with 2 characters")
     void indentAndKeepBlankLines() {
         String expected = "  hello\n  ";
-        String actual = new Formatter("hello\n")
+        String actual = new SQLFormatter("hello\n")
                 .indent()
                 .format();
 
@@ -34,7 +34,7 @@ class FormatterTest {
     @DisplayName("Ensure that a comma is not added when it is the last element")
     void addEndingWhenLast() {
         String expected = "hello,\nkaboom";
-        String actual = new Formatter("hello,\nkaboom")
+        String actual = new SQLFormatter("hello,\nkaboom")
                 .addEnding(true)
                 .format();
 
@@ -45,7 +45,7 @@ class FormatterTest {
     @DisplayName("Ensure that a comma is added when it is the last element")
     void addEndingWhenNotLast() {
         String expected = "hello,\nkaboom,";
-        String actual = new Formatter("hello,\nkaboom")
+        String actual = new SQLFormatter("hello,\nkaboom")
                 .addEnding(false)
                 .format();
 
