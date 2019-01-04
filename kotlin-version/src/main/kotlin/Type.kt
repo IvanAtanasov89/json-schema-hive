@@ -3,7 +3,7 @@ interface Type {
     fun basic(): Boolean
 }
 
-class Array(val type: Type) : Type {
+class Array(private val type: Type) : Type {
     override fun createSqlPart(): String {
         val type = if (this.type.basic()) this.type.createSqlPart() else createComplexSql()
         return "array $type"
@@ -19,7 +19,7 @@ class Array(val type: Type) : Type {
 
 }
 
-class StringType() : Type {
+class StringType: Type {
     override fun createSqlPart(): String {
         return "string"
     }
@@ -29,14 +29,12 @@ class StringType() : Type {
     }
 }
 
-class Struct() : Type {
+class Struct(private val fields: Fields) : Type {
     override fun createSqlPart(): String {
-//        val nestedFields = SqlFormatter()
-        return ""
+        return "struct<${SqlFormatter(fields.createSqlPart()).indent().addNewLines().format()}>"
     }
 
     override fun basic(): Boolean {
         return false
     }
-
 }

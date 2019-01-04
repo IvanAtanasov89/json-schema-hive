@@ -8,7 +8,7 @@ class BasicField(private val name: String, private val isLast: Boolean) : Field 
     }
 }
 
-class Fields: Field {
+open class Fields: Field {
     private var fields = ArrayList<Field>()
 
     fun addField(field: Field): Fields {

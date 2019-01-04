@@ -12,6 +12,11 @@ class SqlFormatter(private var toFormat: String) {
         return this
     }
 
+    fun addNewLines(): SqlFormatter {
+        toFormat = "\n$toFormat\n"
+        return this
+    }
+
     fun format(): String {
         return toFormat
     }

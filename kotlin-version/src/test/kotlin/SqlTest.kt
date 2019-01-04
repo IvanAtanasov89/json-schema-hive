@@ -4,7 +4,7 @@ import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.Is.`is`
 import org.junit.jupiter.api.DisplayName
 
-internal class SqlFormatterTest {
+internal class SqlTest {
 
     @Test
     @DisplayName("indent works with multiple lines")
@@ -18,6 +18,13 @@ internal class SqlFormatterTest {
     fun addEndingWhenIsLast() {
         val formatted = SqlFormatter("mooo").addEnding(true).format()
         assertThat(formatted, `is`("mooo"))
+    }
+
+    @Test
+    @DisplayName("string is prefixed and suffixed with a new line character")
+    fun addNewLines() {
+        val formatted = SqlFormatter("mooo").addNewLines().format()
+        assertThat(formatted, `is`("\nmooo\n"))
     }
 
     @Test
