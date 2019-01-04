@@ -1,3 +1,4 @@
 rootProject.name = 'json-schema-hive'
 include 'field'
+include 'kotlin-version'
 
