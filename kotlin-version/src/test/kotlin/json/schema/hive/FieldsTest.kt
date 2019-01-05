@@ -1,3 +1,5 @@
+package json.schema.hive
+
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.Is.`is`
 import org.junit.jupiter.api.Test

@@ -1,3 +1,5 @@
+package json.schema.hive
+
 interface Field {
     fun createSqlPart() : String
 }

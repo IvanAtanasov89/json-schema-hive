@@ -1,3 +1,5 @@
+package json.schema.hive
+
 import org.junit.jupiter.api.Test
 
 import org.hamcrest.MatcherAssert.assertThat
@@ -10,7 +12,7 @@ import kotlin.properties.Delegates
 
 class TypeTest {
     @Nested
-    @DisplayName("Test the String Type")
+    @DisplayName("Test the String json.schema.hive.Type")
     inner class StringTypeTest {
         @Test
         fun createSqlPart() {
@@ -24,7 +26,7 @@ class TypeTest {
     }
 
     @Nested
-    @DisplayName("Test the Struct Type")
+    @DisplayName("Test the json.schema.hive.Struct json.schema.hive.Type")
     inner class StructTest {
 
         private var struct : Struct by Delegates.notNull()

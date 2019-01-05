@@ -1,9 +1,16 @@
+package json.schema.hive
+
 import com.fasterxml.jackson.databind.JsonNode
 import kotlin.collections.Map.Entry
 
 private const val INDENT_SPACES = 2
 private val INDENTATION = " ".repeat(INDENT_SPACES)
 
+class CreateStatement(private val tableName: String, private val fields: Fields) {
+    fun createSql(): String {
+        return "CREATE TABLE $tableName (${SqlFormatter(fields.createSqlPart()).indent().addNewLines().format()});"
+    }
+}
 
 class SqlFormatter(private var toFormat: String) {
     fun indent(): SqlFormatter {

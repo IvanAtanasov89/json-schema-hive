@@ -1,3 +1,5 @@
+package json.schema.hive
+
 interface Type {
     fun createSqlPart(): String
     fun basic(): Boolean
