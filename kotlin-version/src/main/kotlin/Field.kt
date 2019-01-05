@@ -2,9 +2,9 @@ interface Field {
     fun createSqlPart() : String
 }
 
-class BasicField(private val name: String, private val isLast: Boolean) : Field {
+class BasicField(private val name: String, private val type: Type = StringType(), private val isLast: Boolean) : Field {
     override fun createSqlPart(): String {
-        return ""
+        return SqlFormatter("$name ${type.createSqlPart()}").addEnding(isLast).format()
     }
 }
 

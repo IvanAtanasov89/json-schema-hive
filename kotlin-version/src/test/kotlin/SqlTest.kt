@@ -1,8 +1,12 @@
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.jupiter.api.Test
 
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.Is.`is`
 import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Nested
+
+private val MAPPER = ObjectMapper()
 
 internal class SqlTest {
 
@@ -32,5 +36,17 @@ internal class SqlTest {
     fun addEndingWhenNotLast() {
         val formatted = SqlFormatter("mooo").addEnding(false).format()
         assertThat(formatted, `is`("mooo,"))
+    }
+
+    @Nested
+    @DisplayName("test the looper")
+    inner class SchemaLooperTest {
+        @Test
+        fun looper() {
+            val fileContent = javaClass.getResource("/jsonSchema.json").readText()
+            val node = MAPPER.readTree(fileContent)
+            val fields = read(node)
+            assertThat(fields.createSqlPart(), `is`("firstName string,\nage string,\naliases array<string>"))
+        }
     }
 }

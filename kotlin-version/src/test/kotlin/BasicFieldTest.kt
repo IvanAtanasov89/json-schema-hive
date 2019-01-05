@@ -9,8 +9,8 @@ internal class BasicFieldTest {
     @Test
     @DisplayName("tests the creation of SQL string")
     fun createSqlPart() {
-        val basicField = BasicField(name = "hahaha", isLast = false)
+        val basicField = BasicField(name = "hahaha", type = StringType(), isLast = false)
         val actual = basicField.createSqlPart()
-        assertThat(actual, `is`(""))
+        assertThat(actual, `is`("hahaha string,"))
     }
 }

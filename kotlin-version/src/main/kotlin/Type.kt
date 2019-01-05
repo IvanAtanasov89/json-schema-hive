@@ -3,10 +3,10 @@ interface Type {
     fun basic(): Boolean
 }
 
-class Array(private val type: Type) : Type {
+class ArrayType(private val type: Type) : Type {
     override fun createSqlPart(): String {
         val type = if (this.type.basic()) this.type.createSqlPart() else createComplexSql()
-        return "array $type"
+        return "array<$type>"
     }
 
     override fun basic(): Boolean {
@@ -14,7 +14,7 @@ class Array(private val type: Type) : Type {
     }
 
     private fun createComplexSql(): String {
-        return SqlFormatter(toFormat = type.createSqlPart()).indent().format()
+        return SqlFormatter(toFormat = type.createSqlPart()).indent().addNewLines().format()
     }
 
 }
